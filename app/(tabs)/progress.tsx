@@ -184,6 +184,8 @@ export default function ProgressScreen() {
                 marginVertical: 8,
                 borderRadius: 16,
               }}
+              yAxisLabel=""
+              yAxisSuffix=""
             />
           </View>
 

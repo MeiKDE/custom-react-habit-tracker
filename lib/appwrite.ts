@@ -89,7 +89,7 @@ export const createHabit = async (
         createdAt: new Date().toISOString(),
       }
     );
-    return habit as Habit;
+    return habit as unknown as Habit;
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to create habit"
@@ -107,7 +107,7 @@ export const getUserHabits = async (): Promise<Habit[]> => {
       HABITS_COLLECTION_ID,
       [Query.equal("userId", user.$id), Query.orderDesc("createdAt")]
     );
-    return habits.documents as Habit[];
+    return habits.documents as unknown as Habit[];
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to fetch habits"
@@ -126,7 +126,7 @@ export const updateHabit = async (
       habitId,
       habitData
     );
-    return habit as Habit;
+    return habit as unknown as Habit;
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to update habit"
@@ -194,7 +194,7 @@ export const markHabitComplete = async (
           skipped: false,
         }
       );
-      return completion as HabitCompletion;
+      return completion as unknown as HabitCompletion;
     } else {
       // Create new completion
       const completion = await databases.createDocument(
@@ -211,7 +211,7 @@ export const markHabitComplete = async (
           skipped: false,
         }
       );
-      return completion as HabitCompletion;
+      return completion as unknown as HabitCompletion;
     }
   } catch (error) {
     throw new Error(
@@ -237,7 +237,7 @@ export const skipHabit = async (habitId: string, date: string) => {
         skipped: true,
       }
     );
-    return completion as HabitCompletion;
+    return completion as unknown as HabitCompletion;
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to skip habit"
@@ -261,7 +261,7 @@ export const getHabitCompletions = async (
         Query.orderDesc("date"),
       ]
     );
-    return completions.documents as HabitCompletion[];
+    return completions.documents as unknown as HabitCompletion[];
   } catch (error) {
     throw new Error(
       error instanceof Error ? error.message : "Failed to fetch completions"
@@ -280,7 +280,7 @@ export const getTodayCompletions = async (): Promise<HabitCompletion[]> => {
       COMPLETIONS_COLLECTION_ID,
       [Query.equal("date", today), Query.equal("userId", user.$id)]
     );
-    return completions.documents as HabitCompletion[];
+    return completions.documents as unknown as HabitCompletion[];
   } catch (error) {
     throw new Error(
       error instanceof Error

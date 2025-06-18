@@ -74,7 +74,7 @@ export default function TodayScreen() {
   };
 
   const handleHabitPress = (habit: Habit) => {
-    router.push(`/habit-detail/${habit.$id}`);
+    router.push(`/habit-detail/${habit.$id}` as any);
   };
 
   const todayHabits = habits.filter(
